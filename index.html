@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDB</title>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css">
+    <link rel="stylesheet" href="https://unpkg.com/@tabler/core@latest/dist/css/tabler.min.css">
+
+
+</head>
+
+<body class="antialiased theme-dark">
+    <div class="page-wrapper">
+        <div class="container-xl">
+            <!-- Page title -->
+            <div class="page-header d-print-none">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+                            <a href=".">
+                                <img src="https://preview.tabler.io/static/logo.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+                            </a>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-body">
+            <div class="container-xl">
+
+                <!-- Recipients Element -->
+                <div class="mb-3">
+                    <label class="form-label">Recipients</label>
+                    <div class="form-selectgroup form-selectgroup-boxes d-flex flex-column">
+                        <div class="row">
+                            <div class="col-6 col-sm-3">
+                                <label class="form-selectgroup-item flex-fill">
+                                    <input type="checkbox" name="form-project-manager[]" value="1" class="form-selectgroup-input">
+                                    <div class="form-selectgroup-label d-flex align-items-center p-3">
+                                    <div class="me-3">
+                                        <span class="form-selectgroup-check"></span>
+                                    </div>
+                                    <div class="form-selectgroup-label-content d-flex align-items-center">
+                                        <div>
+                                        <div class="font-weight-medium">RCP1</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="col-6 col-sm-3">
+                                <label class="form-selectgroup-item flex-fill">
+                                    <input type="checkbox" name="form-project-manager[]" value="1" class="form-selectgroup-input">
+                                    <div class="form-selectgroup-label d-flex align-items-center p-3">
+                                    <div class="me-3">
+                                        <span class="form-selectgroup-check"></span>
+                                    </div>
+                                    <div class="form-selectgroup-label-content d-flex align-items-center">
+                                        <div>
+                                        <div class="font-weight-medium">RCP2</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="col-6 col-sm-3">
+                                <label class="form-selectgroup-item flex-fill">
+                                    <input type="checkbox" name="form-project-manager[]" value="1" class="form-selectgroup-input">
+                                    <div class="form-selectgroup-label d-flex align-items-center p-3">
+                                    <div class="me-3">
+                                        <span class="form-selectgroup-check"></span>
+                                    </div>
+                                    <div class="form-selectgroup-label-content d-flex align-items-center">
+                                        <div>
+                                        <div class="font-weight-medium">RCP3</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="col-6 col-sm-3">
+                                <label class="form-selectgroup-item flex-fill">
+                                    <input type="checkbox" name="form-project-manager[]" value="1" class="form-selectgroup-input">
+                                    <div class="form-selectgroup-label d-flex align-items-center p-3">
+                                    <div class="me-3">
+                                        <span class="form-selectgroup-check"></span>
+                                    </div>
+                                    <div class="form-selectgroup-label-content d-flex align-items-center">
+                                        <div>
+                                        <div class="font-weight-medium">RCP4</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="col-6 col-sm-3">
+                                <label class="form-selectgroup-item flex-fill">
+                                    <input type="checkbox" name="form-project-manager[]" value="1" class="form-selectgroup-input">
+                                    <div class="form-selectgroup-label d-flex align-items-center p-3">
+                                    <div class="me-3">
+                                        <span class="form-selectgroup-check"></span>
+                                    </div>
+                                    <div class="form-selectgroup-label-content d-flex align-items-center">
+                                        <div>
+                                        <div class="font-weight-medium">RCP5</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </label>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Message Element -->
+                <div class="mb-3">
+                    <label class="form-label">Message<span class="form-label-description" id="messageLength">78/100</span></label>
+                    <textarea class="form-control" name="message" rows="5" placeholder="Message content..."></textarea>
+                </div>
+
+                <!-- Delivery Area Element -->
+                <div class="mb-3">
+                    <label class="form-label">Delivery Area</label>
+                    <div class="card">
+                        <div class="card-body" id="cardCollapse">
+                            <div class="ratio ratio-16x9">
+                                <div id="map">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6 mt-3 form-floating">
+                                    <input type="text" class="form-control" name="latitude" placeholder="Latitude" value="60.90">
+                                    <label for="floating-input">Latitude</label>
+                                </div>
+                                <div class="col-6 mt-3 form-floating">
+                                    <input type="text" class="form-control" name="longitude" placeholder="Longitude" value="10.75">
+                                    <label for="floating-input">Longitude</label>
+                                </div>
+                                <div class="col mt-3 form-floating">
+                                    <input type="text" class="form-control" name="radius" placeholder="Radius (km)" value="237">
+                                    <label for="floating-input">Radius (km)</label>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!-- Send Button Element -->
+                <!-- fixed-bottom -->
+                <div class=" d-flex justify-content-around p-2 mt-3">
+                    <button type="submit" class=" btn btn-pill btn-danger">Clear</button>
+                    <button type="submit" class=" btn btn-pill btn-dark">Send message</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://browser.sentry-cdn.com/5.27.6/bundle.tracing.min.js" integrity="sha384-9Z8PxByVWP+gIm/rTMPn9BWwknuJR5oJcLj+Nr9mvzk8nJVkVXgQvlLGZ9SIFEJF" crossorigin="anonymous"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
+    <script src="https://unpkg.com/@tabler/core@latest/dist/js/tabler.min.js"></script>
+    <script src="./echo-gdb.js"></script>
+    <script>
+        const metersToPixelsAtMaxZoom = (meters, latitude) =>
+            meters / 0.075 / Math.cos(latitude * Math.PI / 180)
+
+        document.addEventListener("DOMContentLoaded", () => {
+            mapboxgl.accessToken = 'pk.eyJ1IjoiY29kZWNhbG0iLCJhIjoiSzRiOVJvQSJ9.BUVkTT6IYs83xSUs4H7bjQ';
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/dark-v10',
+                zoom: 4,
+                center: [10.75, 60.90],
+                maxZoom: 9
+            })
+
+            map.on('load', function() {
+                map.addSource("source_circle_500", {
+                    "type": "geojson",
+                    "data": {
+                        "type": "FeatureCollection",
+                        "features": [{
+                            "type": "Feature",
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [10.75, 60.90]
+                            }
+                        }]
+                    }
+                });
+
+                map.addLayer({
+                    "id": "circle500",
+                    "type": "circle",
+                    "source": "source_circle_500",
+                    "paint": {
+                        "circle-radius": {
+                            stops: [
+                                [0, 0],
+                                [20, 237]
+                            ],
+                            base: 0.9
+                        },
+                        "circle-color": "red",
+                        "circle-opacity": 0.15
+                    }
+                });
+
+                map.on('click', function(e) {
+                    var coord = e.lngLat
+                    new mapboxgl.Popup()
+                        .setLngLat(coord)
+                        .setHTML('<p style=color:black> Lat: ' + coord.lat + '<br> Long: ' + coord.lng + '</p>')
+                        .addTo(map);
+                });
+
+            });
+
+        });
+    </script>
+</body>
+
+</html>
